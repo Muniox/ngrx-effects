@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as PostActions from './actions';
+import { PostsActions } from './actions';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { PostsService } from '../services/posts.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -9,12 +9,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class PostsEffects {
   getPosts$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(PostActions.getPosts),
+      ofType(PostsActions.getPosts),
       mergeMap(() => {
         return this.postService.getPosts().pipe(
-          map((posts) => PostActions.getPostsSuccess({ posts: posts })),
+          map((posts) => PostsActions.getPostsSuccess({ posts: posts })),
           catchError((error: HttpErrorResponse) =>
-            of(PostActions.getPostsFailure({ error: error.message }))
+            of(PostsActions.getPostsFailure({ error: error.message }))
           )
         );
       })

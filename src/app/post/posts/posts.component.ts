@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import * as PostActions from '../store/actions';
+import { PostsActions } from '../store/actions';
 import {
   errorSelector,
   isLoadingSelector,
@@ -27,6 +27,6 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(PostActions.getPosts());
+    this.store.dispatch(PostsActions.getPosts());
   }
 }
